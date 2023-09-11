@@ -78,6 +78,10 @@ require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
+
+  -- Projects
+  'ahmedkhalf/project.nvim',
+
   'ziglang/zig.vim',
   'tikhomirov/vim-glsl',
 
@@ -366,6 +370,9 @@ require("telescope").setup{
   }
 }
 
+-- Load telescope extensions for file_browser and projects
+require("project_nvim").setup()
+require('telescope').load_extension('projects')
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
