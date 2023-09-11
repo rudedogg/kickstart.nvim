@@ -318,6 +318,18 @@ require('telescope').setup {
   },
 }
 
+-- Close telescope rather than enter normal mode on <esc>
+local actions = require("telescope.actions")
+require("telescope").setup{
+  defaults = {
+    mappings = {
+      i = {
+        ["<esc>"] = actions.close
+      },
+    },
+  }
+}
+
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
