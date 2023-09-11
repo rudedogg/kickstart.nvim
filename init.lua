@@ -169,13 +169,37 @@ require('lazy').setup({
       end,
     },
   },
-  {
-    'Mofiqul/dracula.nvim',
-    priority = 1000,
+
+  { "folke/tokyonight.nvim", name = "tokyonight", priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'dracula'
+      vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
+-- { "rafamadriz/neon", name = "Neon", priority = 1000,
+--     config = function()
+--       vim.cmd.colorscheme 'neon'
+--       vim.g.neon_style = "dark"
+--       vim.g.neon_italic_keyword = true
+--       vim.g.neon_italic_function = true
+--     end,
+--   },
+-- { "Abstract-IDE/Abstract-cs", name = "Abstract-cs", priority = 1000,
+--     config = function()
+--       vim.cmd.colorscheme 'abscs'
+--     end,
+--   },
+-- { "catppuccin/nvim", name = "catppuccin", priority = 1000,
+--     config = function()
+--       vim.cmd.colorscheme 'catppuccin-mocha'
+--     end,
+--   },
+  -- {
+  --   'Mofiqul/dracula.nvim',
+  --   priority = 1000,
+  --   config = function()
+  --     vim.cmd.colorscheme 'dracula'
+  --   end,
+  -- },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -183,7 +207,7 @@ require('lazy').setup({
     opts = {
       options = {
         icons_enabled = false,
-        theme = 'dracula',
+        theme = 'tokyonight',
         component_separators = '|',
         section_separators = '',
       },
