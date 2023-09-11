@@ -387,6 +387,33 @@ vim.keymap.set('n', '<leader>/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
+-- Move selected lines around with J/K
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- No annoying macros, or ex mode
+vim.keymap.set("n", "q", "<nop>")
+vim.keymap.set("n", "Q", "<nop>")
+
+-- Don't move cursor when joining lines
+vim.keymap.set("n", "J", "mzJ`z")
+
+-- Keep cursor centered when navigating search matches
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+-- Don't overwrite clipboard with selection when pasting
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
+-- Yank to system clipboard
+vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+-- Delete to system clipboard
+vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+
+
+vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format)
+
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
