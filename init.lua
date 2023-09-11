@@ -119,7 +119,10 @@ require('lazy').setup({
       "sindrets/diffview.nvim",        -- optional
       "ibhagwan/fzf-lua",              -- optional
     },
-    config = true
+    config = true,
+    opts = {
+      disable_insert_on_commit = false,
+    },
   },
 
   -- Useful plugin to show you pending keybinds.
