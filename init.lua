@@ -54,6 +54,11 @@ require('lazy').setup({
     -- tag = "v0.8.0" -- use tag for stability, or without this to have latest fixed and functions
   },
 
+  -- Scrollbar
+  'petertriho/nvim-scrollbar',
+  'kevinhwang91/nvim-hlslens',
+  -- 'wfxr/minimap.vim',
+
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -246,6 +251,23 @@ require('lazy').setup({
   -- { import = 'custom.plugins' },
 }, {})
 
+local colors = require("tokyonight.colors").setup()
+
+require("scrollbar").setup({
+    handle = {
+        color = colors.bg_highlight,
+    },
+    marks = {
+        Search = { color = colors.orange },
+        Error = { color = colors.error },
+        Warn = { color = colors.warning },
+        Info = { color = colors.info },
+        Hint = { color = colors.hint },
+        Misc = { color = colors.purple },
+    }
+})
+require('hlslens').setup()
+
 vim.filetype.add {
   extension = {
     zon = "zig",
@@ -256,7 +278,7 @@ vim.filetype.add {
 -- NOTE: You can change these options as you wish!
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 
 -- Make line numbers default
 vim.wo.number = true
