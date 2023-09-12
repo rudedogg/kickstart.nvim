@@ -48,6 +48,12 @@ require('lazy').setup({
   'ziglang/zig.vim',
   'tikhomirov/vim-glsl',
 
+  {
+    "LintaoAmons/scratch.nvim",
+    event = 'VimEnter',
+    -- tag = "v0.8.0" -- use tag for stability, or without this to have latest fixed and functions
+  },
+
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
