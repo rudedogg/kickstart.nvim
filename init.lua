@@ -419,6 +419,15 @@ vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
 vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format)
 
+
+-- Doom Emacs mirrors - Cycle to next buffer with gt
+vim.keymap.set('n', 'gt', ':bnext<CR>', { desc = 'Next buffer' })
+
+-- Doom Emacs mirrors - Git
+vim.keymap.set('n', '<leader>gs', require('neogit').open, { desc = '[G]it [S]tatus' })
+vim.keymap.set('n', '<leader>gg', require('neogit').open, { desc = '[G]et [G]it' })
+-- Doom Emacs mirrors - Projects
+vim.keymap.set('n', '<leader>pp', ':Telescope projects<CR>', { desc = '[P]ick [P]rojects' })
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
