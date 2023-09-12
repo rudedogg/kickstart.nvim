@@ -688,8 +688,15 @@ vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { des
 vim.keymap.set('n', '<leader>gs', require('neogit').open, { desc = '[G]it [S]tatus' })
 vim.keymap.set('n', '<leader>gg', require('neogit').open, { desc = '[G]et [G]it' })
 --vim.keymap.set('n', '<leader>bf', require('telescope._extensions.file_browser').file_browser, { desc = '[B]rowse [F]ile' })
+
+-- Buffer stuff
+vim.keymap.set('n', '<leader>b/', require('telescope.builtin').current_buffer_fuzzy_find, { desc = '[B]uffer [/]Live Grep' })
+vim.keymap.set('n', '<leader>bs', require('telescope.builtin').lsp_document_symbols, { desc = '[B]uffer [S]ymbols' })
+vim.keymap.set('n', 'gs', require('telescope.builtin').lsp_document_symbols, { desc = '[G]oto [S]ymbol' })
+
+vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[F]ind [B]uffer' })
 vim.keymap.set('n', '<leader>bf', ':Telescope file_browser<CR>', { desc = '[B]rowse [F]ile' })
-vim.keymap.set('n', '<leader>fb', ':Telescope file_browser<CR>', { desc = '[B]rowse [F]ile' })
+vim.keymap.set('n', '<leader>fB', ':Telescope file_browser<CR>', { desc = '[F]ile [B]rowser' })
 -- Doom Emacs mirrors - Projects
 vim.keymap.set('n', '<leader>pp', ':Telescope projects<CR>', { desc = '[P]ick [P]rojects' })
 --vim.keymap.set('n', '<leader>pp', require('telescope').extensions.projects.projects{}, { desc = '[P]ick [P]roject' })
