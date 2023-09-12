@@ -44,6 +44,16 @@ require('lazy').setup({
   -- Projects
   'ahmedkhalf/project.nvim',
 
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    }
+  },
+
   -- Other file types
   'ziglang/zig.vim',
   'tikhomirov/vim-glsl',
@@ -671,6 +681,8 @@ vim.keymap.set('n', '<leader>zf', ':!zig build run -Doptimize=ReleaseFast<CR>', 
 -- Doom Emacs mirrors - Find files / Grep
 vim.keymap.set('n', '<leader>/', require('telescope.builtin').live_grep, { desc = '[/]Live Grep' })
 vim.keymap.set('n', '<leader>pf', require('telescope.builtin').find_files, { desc = '[P]roject [F]iles' })
+-- vim.keymap.set('n', '<leader>pt', ':TodoTelescope keywords=TODO<CR>', { desc = '[P]roject [T]odos' })
+vim.keymap.set('n', '<leader>pt', ':TodoTelescope<CR>', { desc = '[P]roject [T]odos' })
 vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]ile' })
 -- Doom Emacs mirrors - Git
 vim.keymap.set('n', '<leader>gs', require('neogit').open, { desc = '[G]it [S]tatus' })
