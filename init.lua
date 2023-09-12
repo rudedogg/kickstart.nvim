@@ -495,6 +495,10 @@ require('nvim-treesitter.configs').setup {
 }
 
 -- Diagnostic keymaps
+-- Mirror doom emacs
+vim.keymap.set('n', '[e', vim.diagnostic.goto_prev, { desc = 'Go to previous error message' })
+vim.keymap.set('n', ']e', vim.diagnostic.goto_next, { desc = 'Go to next error message' })
+
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
