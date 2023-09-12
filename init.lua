@@ -658,11 +658,12 @@ vim.keymap.set("n", "<leader>Y", [["+Y]])
 vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
 
-vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format)
+-- TODO: This needs mapped to something else
+-- vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format)
 
 -- undo
 vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
--- vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+-- vim.keymap.set('n', '<leader>bu', vim.cmd.UndotreeToggle)
 
 -- Comment with ctrl+/
 -- vim.keymap.set('n', '<D-a>/', 'gc', { desc = 'Comment Selection' })
@@ -683,18 +684,19 @@ vim.keymap.set('n', '<leader>/', require('telescope.builtin').live_grep, { desc 
 vim.keymap.set('n', '<leader>pf', require('telescope.builtin').find_files, { desc = '[P]roject [F]iles' })
 -- vim.keymap.set('n', '<leader>pt', ':TodoTelescope keywords=TODO<CR>', { desc = '[P]roject [T]odos' })
 vim.keymap.set('n', '<leader>pt', ':TodoTelescope<CR>', { desc = '[P]roject [T]odos' })
-vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]ile' })
 -- Doom Emacs mirrors - Git
 vim.keymap.set('n', '<leader>gs', require('neogit').open, { desc = '[G]it [S]tatus' })
 vim.keymap.set('n', '<leader>gg', require('neogit').open, { desc = '[G]et [G]it' })
 --vim.keymap.set('n', '<leader>bf', require('telescope._extensions.file_browser').file_browser, { desc = '[B]rowse [F]ile' })
+
+vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[F]ind [B]uffer' })
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]ile' })
 
 -- Buffer stuff
 vim.keymap.set('n', '<leader>b/', require('telescope.builtin').current_buffer_fuzzy_find, { desc = '[B]uffer [/]Live Grep' })
 vim.keymap.set('n', '<leader>bs', require('telescope.builtin').lsp_document_symbols, { desc = '[B]uffer [S]ymbols' })
 vim.keymap.set('n', 'gs', require('telescope.builtin').lsp_document_symbols, { desc = '[G]oto [S]ymbol' })
 
-vim.keymap.set('n', '<leader>fb', require('telescope.builtin').buffers, { desc = '[F]ind [B]uffer' })
 vim.keymap.set('n', '<leader>bf', ':Telescope file_browser<CR>', { desc = '[B]rowse [F]ile' })
 vim.keymap.set('n', '<leader>fB', ':Telescope file_browser<CR>', { desc = '[F]ile [B]rowser' })
 -- Doom Emacs mirrors - Projects
