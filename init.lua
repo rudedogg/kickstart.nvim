@@ -314,16 +314,6 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
--- [[ Basic Keymaps ]]
-
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
-vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
-
--- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
-
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -366,63 +356,9 @@ require("telescope").load_extension "file_browser"
 require("project_nvim").setup()
 require('telescope').load_extension('projects')
 
+
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
-
--- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>/', function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
-end, { desc = '[/] Fuzzily search in current buffer' })
-
--- Move selected lines around with J/K
-vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
-vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
-
--- No annoying macros, or ex mode
-vim.keymap.set("n", "q", "<nop>")
-vim.keymap.set("n", "Q", "<nop>")
-
--- Don't move cursor when joining lines
-vim.keymap.set("n", "J", "mzJ`z")
-
--- Keep cursor centered when navigating search matches
-vim.keymap.set("n", "n", "nzzzv")
-vim.keymap.set("n", "N", "Nzzzv")
-
--- Don't overwrite clipboard with selection when pasting
-vim.keymap.set("x", "<leader>p", [["_dP]])
-
--- Yank to system clipboard
-vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
-vim.keymap.set("n", "<leader>Y", [["+Y]])
--- Delete to system clipboard
-vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
-
-
-vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format)
-
-
--- Doom Emacs mirrors - Cycle to next buffer with gt
-vim.keymap.set('n', 'gt', ':bnext<CR>', { desc = 'Next buffer' })
-
--- Doom Emacs mirrors - Git
-vim.keymap.set('n', '<leader>gs', require('neogit').open, { desc = '[G]it [S]tatus' })
-vim.keymap.set('n', '<leader>gg', require('neogit').open, { desc = '[G]et [G]it' })
--- Doom Emacs mirrors - Projects
-vim.keymap.set('n', '<leader>pp', ':Telescope projects<CR>', { desc = '[P]ick [P]rojects' })
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -646,3 +582,113 @@ cmp.setup {
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+-- Undotree
+-- if has("persistent_undo")
+--    let target_path = expand('~/.undodir')
+--
+--     " create the directory and any parent directories
+--     " if the location does not exist.
+--     if !isdirectory(target_path)
+--         call mkdir(target_path, "p", 0700)
+--     endif
+--
+--     let &undodir=target_path
+--     set undofile
+-- endif
+
+
+-- settings
+
+
+
+-- Keybindings
+-- [[ Basic Keymaps ]]
+
+-- Keymaps for better default experience
+-- See `:help vim.keymap.set()`
+vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
+
+-- Remap for dealing with word wrap
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+
+-- See `:help telescope.builtin`
+vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<leader><space>', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<leader>/', function()
+  -- You can pass additional configuration to telescope to change theme, layout, etc.
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = '[/] Fuzzily search in current buffer' })
+
+-- Move selected lines around with J/K
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- No annoying macros, or ex mode
+vim.keymap.set("n", "q", "<nop>")
+vim.keymap.set("n", "Q", "<nop>")
+
+-- Don't move cursor when joining lines
+vim.keymap.set("n", "J", "mzJ`z")
+
+-- Keep cursor centered when navigating search matches
+vim.keymap.set("n", "n", "nzzzv")
+vim.keymap.set("n", "N", "Nzzzv")
+
+-- Don't overwrite clipboard with selection when pasting
+vim.keymap.set("x", "<leader>p", [["_dP]])
+
+-- Yank to system clipboard
+vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+vim.keymap.set("n", "<leader>Y", [["+Y]])
+-- Delete to system clipboard
+vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+
+
+vim.keymap.set("n", "<leader>bf", vim.lsp.buf.format)
+
+-- undo
+vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
+-- vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle)
+
+-- Comment with ctrl+/
+-- vim.keymap.set('n', '<D-a>/', 'gc', { desc = 'Comment Selection' })
+-- vim.keymap.set('v', '<D-a>/', 'gc', { desc = 'Comment Selection' })
+
+-- Doom Emacs mirrors - Cycle to next buffer with gt
+vim.keymap.set('n', 'gt', ':bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', 'gT', ':bprev<CR>', { desc = 'Previous buffer' })
+
+-- Doom Emacs mirrors - Zig
+vim.keymap.set('n', '<leader>pc', ':!zig build run<CR>', { desc = '[P]roject [C]ompile' })
+vim.keymap.set('n', '<leader>zb', ':!zig build<CR>', { desc = '[B]uild' })
+vim.keymap.set('n', '<leader>zt', ':!zig build test<CR>', { desc = '[T]est' })
+vim.keymap.set('n', '<leader>zs', ':!zig build run -Doptimize=ReleaseSafe<CR>', { desc = 'Release[S]afe' })
+vim.keymap.set('n', '<leader>zf', ':!zig build run -Doptimize=ReleaseFast<CR>', { desc = 'Release[F]ast' })
+-- Doom Emacs mirrors - Find files / Grep
+vim.keymap.set('n', '<leader>/', require('telescope.builtin').live_grep, { desc = '[/]Live Grep' })
+vim.keymap.set('n', '<leader>pf', require('telescope.builtin').find_files, { desc = '[P]roject [F]iles' })
+vim.keymap.set('n', '<leader>ff', require('telescope.builtin').find_files, { desc = '[F]ind [F]ile' })
+-- Doom Emacs mirrors - Git
+vim.keymap.set('n', '<leader>gs', require('neogit').open, { desc = '[G]it [S]tatus' })
+vim.keymap.set('n', '<leader>gg', require('neogit').open, { desc = '[G]et [G]it' })
+--vim.keymap.set('n', '<leader>bf', require('telescope._extensions.file_browser').file_browser, { desc = '[B]rowse [F]ile' })
+vim.keymap.set('n', '<leader>bf', ':Telescope file_browser<CR>', { desc = '[B]rowse [F]ile' })
+vim.keymap.set('n', '<leader>fb', ':Telescope file_browser<CR>', { desc = '[B]rowse [F]ile' })
+-- Doom Emacs mirrors - Projects
+vim.keymap.set('n', '<leader>pp', ':Telescope projects<CR>', { desc = '[P]ick [P]rojects' })
+--vim.keymap.set('n', '<leader>pp', require('telescope').extensions.projects.projects{}, { desc = '[P]ick [P]roject' })
+
+vim.keymap.set("n", "<leader>x", "<cmd>Scratch<cr>")
+vim.keymap.set("n", "<leader>fx", "<cmd>ScratchOpen<cr>")
+
+vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
+vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
