@@ -71,10 +71,12 @@ vim.opt.rtp:prepend(lazypath)
 --    as they will be available in your neovim runtime.
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
+  'mbbill/undotree',
 
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
+  'sindrets/diffview.nvim',
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
@@ -372,8 +374,10 @@ require("telescope").setup{
 }
 
 -- Load telescope extensions for file_browser and projects
+require("telescope").load_extension "file_browser"
 require("project_nvim").setup()
 require('telescope').load_extension('projects')
+
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
