@@ -691,6 +691,9 @@ vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
 -- vim.keymap.set('n', '<D-a>/', 'gc', { desc = 'Comment Selection' })
 -- vim.keymap.set('v', '<D-a>/', 'gc', { desc = 'Comment Selection' })
 
+-- Zig greps
+vim.keymap.set('n', '<leader>z/', ':Telescope live_grep search_dirs={"~/Developer/zig-macos-x86_64-0.11.0/lib/std"}<CR>', { desc = '[/]Live std Grep'})
+vim.keymap.set('n', '<leader>fv', ':Telescope live_grep search_dirs={"src/vulkan/"} type_filter=zig<CR>', { desc = '[/]Live vulkan Grep'})
 -- Doom Emacs mirrors - Cycle to next buffer with gt
 vim.keymap.set('n', 'gt', ':bnext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', 'gT', ':bprev<CR>', { desc = 'Previous buffer' })
