@@ -700,8 +700,11 @@ vim.keymap.set('n', 'gT', ':bprev<CR>', { desc = 'Previous buffer' })
 
 -- Doom Emacs mirrors - Zig
 vim.keymap.set('n', '<leader>pc', ':make run<CR>', { desc = '[P]roject [C]ompile' })
-vim.keymap.set('n', '<leader>zb', ':make<CR>', { desc = '[B]uild' })
-vim.keymap.set('n', '<leader>zt', ':make test<CR>', { desc = '[T]est' })
+vim.keymap.set('n', '<leader>pb', ':make<CR>', { desc = '[P]roject [B]uild' })
+
+vim.keymap.set('n', '<leader>zr', ':make run<CR>', { desc = '[Z]ig [R]un' })
+vim.keymap.set('n', '<leader>zb', ':make<CR>', { desc = '[Z]ig [B]uild' })
+vim.keymap.set('n', '<leader>zt', ':make test<CR>', { desc = '[Z]ig [T]est' })
 vim.keymap.set('n', '<leader>zs', ':make run -Doptimize=ReleaseSafe<CR>', { desc = 'Release[S]afe' })
 vim.keymap.set('n', '<leader>zf', ':make run -Doptimize=ReleaseFast<CR>', { desc = 'Release[F]ast' })
 -- Doom Emacs mirrors - Find files / Grep
