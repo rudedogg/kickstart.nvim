@@ -614,8 +614,7 @@ cmp.setup {
 --     let &undodir=target_path
 --     set undofile
 -- endif
-
--- ZLS
+--
 
 local lspconfig = require('lspconfig')
 local on_attach = function(_, bufnr)
@@ -629,9 +628,8 @@ for _, lsp in ipairs(servers) do
   }
 end
 
--- settings
-
-
+-- LSP
+-- require('lspconfig').clangd.setup {}
 require('lspconfig').zls.setup {}
 
 -- Keybindings
@@ -695,6 +693,7 @@ vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
 -- Zig greps
 vim.keymap.set('n', '<leader>z/', ':Telescope live_grep search_dirs={"~/Developer/zig-macos-x86_64-0.11.0/lib/std"}<CR>', { desc = '[/]Live std Grep'})
 vim.keymap.set('n', '<leader>fv', ':Telescope live_grep search_dirs={"src/vulkan/"} type_filter=zig<CR>', { desc = '[/]Live vulkan Grep'})
+
 -- Doom Emacs mirrors - Cycle to next buffer with gt
 vim.keymap.set('n', 'gt', ':bnext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', 'gT', ':bprev<CR>', { desc = 'Previous buffer' })
