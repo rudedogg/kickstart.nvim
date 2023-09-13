@@ -699,11 +699,11 @@ vim.keymap.set('n', 'gt', ':bnext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', 'gT', ':bprev<CR>', { desc = 'Previous buffer' })
 
 -- Doom Emacs mirrors - Zig
-vim.keymap.set('n', '<leader>pc', ':!zig build run<CR>', { desc = '[P]roject [C]ompile' })
-vim.keymap.set('n', '<leader>zb', ':!zig build<CR>', { desc = '[B]uild' })
-vim.keymap.set('n', '<leader>zt', ':!zig build test<CR>', { desc = '[T]est' })
-vim.keymap.set('n', '<leader>zs', ':!zig build run -Doptimize=ReleaseSafe<CR>', { desc = 'Release[S]afe' })
-vim.keymap.set('n', '<leader>zf', ':!zig build run -Doptimize=ReleaseFast<CR>', { desc = 'Release[F]ast' })
+vim.keymap.set('n', '<leader>pc', ':make run<CR>', { desc = '[P]roject [C]ompile' })
+vim.keymap.set('n', '<leader>zb', ':make<CR>', { desc = '[B]uild' })
+vim.keymap.set('n', '<leader>zt', ':make test<CR>', { desc = '[T]est' })
+vim.keymap.set('n', '<leader>zs', ':make run -Doptimize=ReleaseSafe<CR>', { desc = 'Release[S]afe' })
+vim.keymap.set('n', '<leader>zf', ':make run -Doptimize=ReleaseFast<CR>', { desc = 'Release[F]ast' })
 -- Doom Emacs mirrors - Find files / Grep
 vim.keymap.set('n', '<leader>/', require('telescope.builtin').live_grep, { desc = '[/]Live Grep' })
 vim.keymap.set('n', '<leader>pf', require('telescope.builtin').find_files, { desc = '[P]roject [F]iles' })
