@@ -632,6 +632,7 @@ end
 -- settings
 
 
+require('lspconfig').zls.setup {}
 
 -- Keybindings
 -- [[ Basic Keymaps ]]
