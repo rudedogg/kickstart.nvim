@@ -516,7 +516,7 @@ local servers = {
   -- rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
-  zls = { filetypes = { 'zig', 'zon'} },
+  zls = { filetypes = { 'zig', 'zir', 'zon'} },
 
   lua_ls = {
     Lua = {
