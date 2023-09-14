@@ -698,34 +698,42 @@ vim.keymap.set('n', '<leader>fv', ':Telescope live_grep search_dirs={"src/vulkan
 vim.keymap.set('n', 'gt', ':bnext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', 'gT', ':bprev<CR>', { desc = 'Previous buffer' })
 
--- TODO: Use makeprg to have this run before :make, or do it properly in the vim compiler config
-local function zigthing()
-  -- Set correct error format stings. This gets us proper data in the quickfix list/table
-  -- HACK: This should be handled at the Vim Compiler level I think
-  -- TODO: Multiline error output (https://ziglang.org/documentation/master/#Doc-Comments)
-  vim.opt.errorformat = "%f:%l:%c: %trror: %m" -- error:
-  vim.opt.errorformat:append("%f:%l:%c: %tote: %m") -- note:
-  vim.opt.errorformat:append("%f:%l:%c: 0x %m") -- runtime panic
-  vim.opt.errorformat:append("%f:%l:%c: %m") -- test failure, runtime panic
-  -- TODO: Multiline test output (https://ziglang.org/documentation/master/#Test-Failure)
-  -- TODO note: output can be multiline too, see (https://ziglang.org/documentation/master/#toc-packed-struct)
+-- Set the proper error format before we run :make with Zig
+vim.api.nvim_create_autocmd({"QuickFixCmdPre"}, {
+  pattern = "make*", -- unfortunately you can't tell if zig build is used here
+  callback = function() 
+    -- Set correct error format stings. This gets us proper data in the quickfix list/table
+    -- HACK: This should be handled at the Vim Compiler level I think
+    -- TODO: Multiline error output (https://ziglang.org/documentation/master/#Doc-Comments)
+    -- TODO: Multiline test output (https://ziglang.org/documentation/master/#Test-Failure)
+    -- TODO note: output can be multiline too, see (https://ziglang.org/documentation/master/#toc-packed-struct)
+    vim.opt_local.errorformat = "%f:%l:%c: %trror: %m" -- error:
+    vim.opt_local.errorformat:append("%f:%l:%c: %tote: %m") -- note:
+    vim.opt_local.errorformat:append("%f:%l:%c: 0x %m") -- runtime panic
+    vim.opt_local.errorformat:append("%f:%l:%c: %m") -- test failure, runtime panic
+  end,
+})
 
-  vim.cmd(":make run")
-  local namespace_id = vim.api.nvim_create_namespace("Zig Compiler")
-  local current_buffer_id = vim.api.nvim_win_get_buf(0) -- Gets active buffer id for current window
-  
-  -- Load the valid items in the quickfix list as Neovim diagnostics 
-  vim.diagnostic.set(namespace_id, current_buffer_id, vim.diagnostic.fromqflist(vim.fn.getqflist()))
+-- Load the quickfix output from :make(zig build) into Neovim diagnostics
+vim.api.nvim_create_autocmd({"QuickFixCmdPost"}, {
+-- TODO: Consider using makeprg to have this run before :make, or do it properly in the vim compiler config
+  pattern = "make*", -- unfortunately you can't tell if zig build is used here
+  callback = function() 
+    local namespace_id = vim.api.nvim_create_namespace("Zig Compiler")
+    local current_buffer_id = vim.api.nvim_win_get_buf(0) -- Gets active buffer id for current window
 
-  -- Show trouble if there are multiple errors
-  local error_count = #vim.diagnostic.get(current_buffer_id, { severity = vim.diagnostic.severity.ERROR })
-  if error_count > 1 then
-    vim.cmd(":Trouble")
-  end
-end
+    -- Load the valid items in the quickfix list as Neovim diagnostics 
+    vim.diagnostic.set(namespace_id, current_buffer_id, vim.diagnostic.fromqflist(vim.fn.getqflist()))
+
+    -- Show trouble if there are multiple errors
+    local error_count = #vim.diagnostic.get(current_buffer_id, { severity = vim.diagnostic.severity.ERROR })
+    if error_count > 1 then
+      vim.cmd(":Trouble")
+    end
+  end,
+})
 -- Doom Emacs mirrors - Zig
--- vim.keymap.set('n', '<leader>pc', ' :make run<CR> ', { desc = '[P]roject [C]ompile' })
-vim.keymap.set('n', '<leader>pc', zigthing, { desc = '[P]roject [C]ompile' })
+vim.keymap.set('n', '<leader>pc', ' :make run<CR> ', { desc = '[P]roject [C]ompile' })
 vim.keymap.set('n', '<leader>pb', ':make<CR>', { desc = '[P]roject [B]uild' })
 
 vim.keymap.set('n', '<leader>zr', ':make run<CR>', { desc = '[Z]ig [R]un' })
