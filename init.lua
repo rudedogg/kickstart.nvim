@@ -729,6 +729,8 @@ vim.api.nvim_create_autocmd({"QuickFixCmdPost"}, {
     local error_count = #vim.diagnostic.get(current_buffer_id, { severity = vim.diagnostic.severity.ERROR })
     if error_count > 1 then
       vim.cmd(":Trouble")
+    elseif error_count == 0 then
+      vim.cmd(":TroubleClose")
     end
   end,
 })
