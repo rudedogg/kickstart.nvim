@@ -714,6 +714,22 @@ vim.api.nvim_create_autocmd({"QuickFixCmdPre"}, {
   end,
 })
 
+-- -- Hide diagnostics on buffer :write
+-- vim.api.nvim_create_autocmd({"BufWritePre"}, {
+--   pattern = "*.zig",
+--   callback = function() 
+--     vim.diagnostic.hide(nil, 0) -- FYI: since we pass a nil namespace this hides all diagnostics for current buffer
+--   end,
+-- })
+--
+-- -- Hide diagnostics when going into insert mode
+-- vim.api.nvim_create_autocmd({"CursorMovedI"}, {
+--   pattern = "*.zig",
+--   callback = function() 
+--     vim.diagnostic.hide(nil, 0) -- FYI: since we pass a nil namespace this hides all diagnostics for current buffer
+--   end,
+-- })
+
 -- Load the quickfix output from :make(zig build) into Neovim diagnostics
 vim.api.nvim_create_autocmd({"QuickFixCmdPost"}, {
 -- TODO: Consider using makeprg to have this run before :make, or do it properly in the vim compiler config
